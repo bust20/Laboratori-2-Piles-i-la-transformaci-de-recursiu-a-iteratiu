@@ -1,7 +1,3 @@
-package Partitions;
-
-import ArrayStack.ArrayStack;
-
 public class Partitions {
 
 
@@ -10,19 +6,22 @@ public class Partitions {
         final int sumContext;
         final int numPartsContext;
         // Local variables
-        long f;
+        int f1;
+        int f2;
         // Entry point
         EntryPoint entryPoint;
 
-        Context(int n) {
-            this.n = n;
-            this.f = 0L;
+        Context(int sumContext, int numPartsContext) {
+            this.sumContext = sumContext;
+            this.numPartsContext = numPartsContext;
+            this.f1 = 0;
+            this.f2 = 0;
             this.entryPoint = EntryPoint.CALL;
         }
     }
 
     private enum EntryPoint {
-        CALL, RESUME
+        CALL, RESUME1, RESUME2
     }
 
 
@@ -40,14 +39,14 @@ public class Partitions {
         int return_ = 0;
 
         var stack = new ArrayStack<Context>();
-        stack.push(new Context(sum));
+        stack.push(new Context(sum, numParts));
 
         while (!stack.isEmpty()) {
             var context = stack.top();
 
             switch (context.entryPoint) {
                 case CALL -> {
-                    if (context.numPartsContext <= 0 || context.numPartsContext > sum) {
+                    if (context.numPartsContext <= 0 || context.numPartsContext > context.sumContext) {
                         return_ = 0;
                         stack.pop();
                     } else if (context.numPartsContext == context.sumContext) {
@@ -70,8 +69,9 @@ public class Partitions {
                     stack.pop();
                 }
             }
-            return return_;
         }
+
+        return return_;
     }
 
 

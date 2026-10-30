@@ -1,5 +1,3 @@
-package ArrayStack;
-
 import java.util.NoSuchElementException;
 
 public class ArrayStack<E> implements Stack<E> {
@@ -40,6 +38,7 @@ public class ArrayStack<E> implements Stack<E> {
         }
 
         myArray[size] = elem;
+        size++;
     }
 
     @Override
