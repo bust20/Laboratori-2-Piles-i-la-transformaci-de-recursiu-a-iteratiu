@@ -1,3 +1,5 @@
+package ArrayStack;
+
 import java.util.NoSuchElementException;
 
 public class ArrayStack<E> implements Stack<E> {
@@ -10,7 +12,7 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public E top() {
 
-        if (size == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException("La pila está buida");
         }
 
@@ -20,7 +22,7 @@ public class ArrayStack<E> implements Stack<E> {
     @Override
     public void pop() {
 
-        if (size == 0) {
+        if (isEmpty()) {
             throw new NoSuchElementException("La pila está buida");
         }
 
